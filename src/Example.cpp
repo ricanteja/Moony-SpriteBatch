@@ -15,7 +15,7 @@
 
 #include <iostream>
 #include <iterator>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 #include "Log.h"
 #include "TextureAtlas.h"
@@ -34,8 +34,9 @@ int testMoony()
 	if(!textureman.loadFromFile("./B/B.mtpf"))
 		return -1;
 
-	moony::SubTexture subtexture = textureman.findSubTexture("gottagofast.png");
+	moony::SubTexture subtexture = textureman.findSubTexture("player.png");
 	moony::SubTexture thiswillfail = textureman.findSubTexture("doesnotexist.png");
+
 	moony::RenderManager renderman;
 	moony::Sprite player(subtexture);
 
@@ -55,7 +56,7 @@ int testMoony()
 
 	std::vector<std::string> names = textureman.getSubTextureNames();
 
-	for(size_t index = 0; index < 20000; index++)
+	for(size_t index = 0; index < 0; index++)
 	{
 		size_t name_index = index % names.size();
 		subtexture = textureman.findSubTexture(names[name_index]);
@@ -129,9 +130,9 @@ int testMoony()
 		window.clear(sf::Color::Black);
 		renderman.clear();
 
-		for(const moony::Sprite& sprite : sprites)
+		/*for(const moony::Sprite& sprite : sprites)
 			renderman.draw(sprite);
-
+*/
 		renderman.draw(player);
 		renderman.batch();
 

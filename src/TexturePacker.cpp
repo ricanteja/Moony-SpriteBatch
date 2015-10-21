@@ -17,7 +17,7 @@
 #include <sstream>
 #include <random>
 #include <zlib.h>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 #include "Log.h"
 
@@ -32,7 +32,7 @@ void printHelp()
 		<< "To use the program invoke it through the commandline\n"
 		<< "The program takes flags to modify behavior, these are:\n"
 		<< "help flag       [-h]\n\tPrints this help message\n"
-		<< "size flag       [-s WIDTH HEIGHT]\n\tSet the output size (power of two size recommended)\n"
+		//<< "size flag       [-s WIDTH HEIGHT]\n\tSet the output size (power of two size recommended)\n"
 		<< "binary flag     [-b]\n\tOutput single binary file\n"
 		<< "target folder   [-f FOLDER]\n\tSpecify the location of the images to be packed\n"
 		<< "recursive flag  [-r]\n\tRecursively search sub-directories\n"
@@ -45,7 +45,6 @@ void printHelp()
 int main(int argc, char* argv[])
 {
 	sf::Vector2u texture_size(MAX_TEXTURE_SIZE, MAX_TEXTURE_SIZE);
-	bool flag_setsize = false;
 	bool flag_verbose = false;
 	bool flag_binary = false;
 	std::string file_folder = getCurrentDirectory();

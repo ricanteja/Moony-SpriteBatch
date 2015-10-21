@@ -7,7 +7,7 @@
 #include <array>
 #include <random>
 #include <iostream>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 #include "TextureAtlas.h"
 

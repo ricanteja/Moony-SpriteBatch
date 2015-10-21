@@ -13,7 +13,7 @@
 #include <string>
 #include <cstring>
 
-#include "../include/Log.h"
+#include "Log.h"
 #include "TexturePacker.h"
 
 

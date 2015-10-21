@@ -7,7 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <unordered_map>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <zlib.h>
 
 #include "Log.h"
@@ -103,13 +103,19 @@ namespace moony
 
 		const SubTexture findSubTexture(const std::string& name)
 		{
+			SubTexture subtexture;
+
 			for(TextureAtlas& atlas : mTextureAtlases)
 			{
 				if(atlas.mSubTextureTable.count(name))
-					return SubTexture(&atlas.mTexture, atlas.mSubTextureTable[name]);
+				{
+					subtexture = SubTexture(&atlas.mTexture, atlas.mSubTextureTable[name]);
+					break;
+				}
 			}
 
-			std::cerr << "Could not find sub texture \"" << name << "\".\n";
+
+			return subtexture;
 		}
 
 		const size_t size()

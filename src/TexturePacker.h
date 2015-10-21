@@ -10,9 +10,9 @@
 
 #include <vector>
 #include <stack>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
-#include "../include/Log.h"
+#include "Log.h"
 
 
 struct SubImage
