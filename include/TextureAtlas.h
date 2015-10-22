@@ -118,21 +118,6 @@ namespace moony
 			return subtexture;
 		}
 
-		const size_t size()
-		{
-			size_t size = 0;
-
-			for(const TextureAtlas& atlas : mTextureAtlases)
-				size += atlas.mSubTextureTable.size();
-
-			return size;
-		}
-
-		const std::vector<TextureAtlas>& getTextureAtlases()
-		{
-			return mTextureAtlases;
-		}
-
 		std::vector<std::string> getSubTextureNames()
 		{
 			std::vector<std::string> names;

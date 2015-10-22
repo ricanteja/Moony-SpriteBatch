@@ -21,7 +21,7 @@
 #include "TextureAtlas.h"
 #include "SpriteBatch.h"
 
-int testMoony()
+int testMoony(int count)
 {
     std::random_device random;
     std::srand(random());
@@ -40,23 +40,23 @@ int testMoony()
     //if(!textureman.loadFromFile("A/C/C.mtpf"))
     //    return -1;
 
-	moony::SubTexture subtexture = textureman.findSubTexture("g.png");
+	moony::SubTexture subtexture = textureman.findSubTexture("fat_g.png");
 	moony::SubTexture thiswillfail = textureman.findSubTexture("doesnotexist.png");
 
 	moony::RenderManager renderman;
-	moony::Sprite player1(subtexture,2);
+	moony::Sprite player1(subtexture, 5, sf::Color(255, 255, 255, 200));
 	moony::Sprite player2(textureman.findSubTexture("r.png"));
 
 	std::vector<moony::Sprite> sprites;
 
 	std::vector<std::string> names = textureman.getSubTextureNames();
 
-	for(size_t index = 0; index < 10; index++)
+	for(size_t index = 0; index < count; index++)
 	{
 		size_t name_index = index % names.size();
 		subtexture = textureman.findSubTexture(names[name_index]);
 
-		sprites.push_back(moony::Sprite(subtexture, random() % 5));
+		sprites.push_back(moony::Sprite(subtexture, random() % 10));
 		sprites.back().setPosition(std::rand() % 800, std::rand() % 600);
 		sprites.back().setOrigin(sprites.back().mTextureRect.width / 2, sprites.back().mTextureRect.height / 2);
 	}
@@ -114,7 +114,6 @@ int testMoony()
 			{
 				sprite.rotate(num * 10);
 				sprite.setScale(num, num);
-				//sprite.move(num, num);
 			}
 
 			frame_total -= frame_limit;
@@ -155,7 +154,7 @@ int testMoony()
 
 int main()
 {
-	testMoony();
+	testMoony(100);
 
 	return 0;
 }

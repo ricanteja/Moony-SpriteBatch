@@ -139,19 +139,19 @@ namespace moony
 
 			batch_ptr->mVertices[vertex_count].position = transform.transformPoint(0.0f, 0.0f);
 			batch_ptr->mVertices[vertex_count].texCoords = position;
-			batch_ptr->mVertices[vertex_count].color = sf::Color::White;
+			batch_ptr->mVertices[vertex_count].color = sprite.mColor;
 
 			batch_ptr->mVertices[vertex_count + 1].position = transform.transformPoint(0.0f, size.y);
 			batch_ptr->mVertices[vertex_count + 1].texCoords = sf::Vector2f(position.x, size.y + position.y);
-			batch_ptr->mVertices[vertex_count + 1].color = sf::Color::White;
+			batch_ptr->mVertices[vertex_count + 1].color = sprite.mColor;
 
 			batch_ptr->mVertices[vertex_count + 2].position = transform.transformPoint(size);
 			batch_ptr->mVertices[vertex_count + 2].texCoords = size + position;
-			batch_ptr->mVertices[vertex_count + 2].color = sf::Color::White;
+			batch_ptr->mVertices[vertex_count + 2].color = sprite.mColor;
 
 			batch_ptr->mVertices[vertex_count + 3].position = transform.transformPoint(size.x, 0.0f);
 			batch_ptr->mVertices[vertex_count + 3].texCoords = sf::Vector2f(size.x + position.x, position.y);
-			batch_ptr->mVertices[vertex_count + 3].color = sf::Color::White;
+			batch_ptr->mVertices[vertex_count + 3].color = sprite.mColor;
 
 			batch_ptr->mSpriteCount++;
 		}

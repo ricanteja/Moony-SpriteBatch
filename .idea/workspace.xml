@@ -18,13 +18,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa2c968e-0011-4964-b9bc-a0b5b91f464f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Directories.h" afterPath="$PROJECT_DIR$/src/Directories.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Example.cpp" afterPath="$PROJECT_DIR$/src/Example.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/SpriteBatch.h" afterPath="$PROJECT_DIR$/include/SpriteBatch.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/TextureAtlas.h" afterPath="$PROJECT_DIR$/include/TextureAtlas.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TexturePacker.cpp" afterPath="$PROJECT_DIR$/src/TexturePacker.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TexturePacker.h" afterPath="$PROJECT_DIR$/src/TexturePacker.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MoonySpriteBatch.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,8 +48,8 @@
       <file leaf-file-name="Example.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Example.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26966292">
-              <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.7303371">
+              <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
               <folding>
                 <element signature="e#899#918#0" expanded="true" />
               </folding>
@@ -65,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/include/SpriteBatch.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="125" column="13" selection-start-line="125" selection-start-column="13" selection-end-line="125" selection-end-column="13" />
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding>
                 <element signature="e#114#131#0" expanded="true" />
               </folding>
@@ -111,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/include/TextureAtlas.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+              <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
               <folding>
                 <element signature="e#48#67#0" expanded="true" />
               </folding>
@@ -134,10 +130,10 @@
         <option value="$PROJECT_DIR$/Example/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/Directories.h" />
-        <option value="$PROJECT_DIR$/include/TextureAtlas.h" />
-        <option value="$PROJECT_DIR$/include/SpriteBatch.h" />
         <option value="$PROJECT_DIR$/src/TexturePacker.cpp" />
         <option value="$PROJECT_DIR$/src/TexturePacker.h" />
+        <option value="$PROJECT_DIR$/include/SpriteBatch.h" />
+        <option value="$PROJECT_DIR$/include/TextureAtlas.h" />
         <option value="$PROJECT_DIR$/src/Example.cpp" />
       </list>
     </option>
@@ -504,21 +500,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/TextureAtlas.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-          <folding>
-            <element signature="e#48#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/mingw-w64/libraries/sfml/include/SFML/Graphics/Drawable.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.19850187">
           <caret line="68" column="17" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/TextureAtlas.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+          <folding>
+            <element signature="e#48#67#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -553,7 +549,7 @@
     <entry file="file://$PROJECT_DIR$/include/SpriteBatch.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="125" column="13" selection-start-line="125" selection-start-column="13" selection-end-line="125" selection-end-column="13" />
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="e#114#131#0" expanded="true" />
           </folding>
@@ -562,8 +558,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Example.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26966292">
-          <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.7303371">
+          <caret line="39" column="48" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="48" />
           <folding>
             <element signature="e#899#918#0" expanded="true" />
           </folding>
