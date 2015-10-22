@@ -32,26 +32,25 @@ void printHelp()
 		<< "To use the program invoke it through the commandline\n"
 		<< "The program takes flags to modify behavior, these are:\n"
 		<< "help flag       [-h]\n\tPrints this help message\n"
-		//<< "size flag       [-s WIDTH HEIGHT]\n\tSet the output size (power of two size recommended)\n"
 		<< "binary flag     [-b]\n\tOutput single binary file\n"
 		<< "target folder   [-f FOLDER]\n\tSpecify the location of the images to be packed\n"
 		<< "recursive flag  [-r]\n\tRecursively search sub-directories\n"
 		<< "debug flag      [-d IMAGE_COUNT]\n\tTest the program and generate test images\n"
 		<< "verbose flag    [-v]\n\tOutputs more messages and logs them to file\n";
-
-	std::cout << "\n\nThank you for packing your textures with Moony-TexturePacker\nPress any key to exit.";
 }
 
 int main(int argc, char* argv[])
 {
-	sf::Vector2u texture_size(MAX_TEXTURE_SIZE, MAX_TEXTURE_SIZE);
+	std::random_device random;
+	std::srand(random());
+
 	bool flag_verbose = false;
 	bool flag_binary = false;
 	std::string file_folder = getCurrentDirectory();
 	bool flag_recurse = false;
 	bool flag_debug = false;
-	unsigned int debug_count = 500;
-
+	unsigned int debug_count = 512;
+    
 	if(argc > 1)
 	{
 		for(unsigned int index = 1; index < argc; index++)
@@ -61,20 +60,6 @@ int main(int argc, char* argv[])
 				printHelp();
 				return 0;
 			}
-			/*else if(std::strcmp(argv[index], "-s") == 0) // So broken..
-			{
-				flag_setsize = true;
-
-				if(index + 2 < argc)
-				{
-					texture_size.x = std::atoi(argv[++index]);
-					texture_size.y = std::atoi(argv[++index]);
-					texture_size.x = texture_size.x > 0 && texture_size.x < MAX_TEXTURE_SIZE ? texture_size.x : MAX_TEXTURE_SIZE;
-					texture_size.y = texture_size.y > 0 && texture_size.y < MAX_TEXTURE_SIZE ? texture_size.y : MAX_TEXTURE_SIZE;
-				}
-				else
-					logError() << "Not enough arguments, using default\n";
-			}*/
 			else if(std::strcmp(argv[index], "-b") == 0)
 				flag_binary = true;
 			else if(std::strcmp(argv[index], "-f") == 0)
@@ -165,7 +150,7 @@ int main(int argc, char* argv[])
 				TexturePack& pack = pack_list[index];
 
 				sf::Image image = pack.getCropImage();
-				texture_size = pack.mCropSize;
+				sf::Vector2u texture_size = pack.mCropSize;
 
 				if(flag_binary)
 				{
@@ -180,7 +165,7 @@ int main(int argc, char* argv[])
 				}
 				else
 				{
-					output_name = dir_path + "/\\" + std::to_string(index) + folder_name + ".png"; /* FIX ME */
+					output_name = dir_path + "/\\ta_" + std::to_string(index) + folder_name + ".png";
 					image.saveToFile(output_name);
 
 					output_file << "F " << output_name.size() << " ";

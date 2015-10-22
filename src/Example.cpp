@@ -23,48 +23,55 @@
 
 int testMoony()
 {
+    std::random_device random;
+    std::srand(random());
+
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Sprite Batching and Texture Atlases", sf::Style::Close);
-	window.setVerticalSyncEnabled(true);
+	//window.setVerticalSyncEnabled(true);
 
 	moony::TextureManager textureman;
 
-	if(!textureman.loadFromFile("./A/A.mtpf"))
+	if(!textureman.loadFromFile("A/A.mtpf"))
 		return -1;
 
-	if(!textureman.loadFromFile("./B/B.mtpf"))
+	if(!textureman.loadFromFile("B/B.mtpf"))
 		return -1;
 
-	moony::SubTexture subtexture = textureman.findSubTexture("player.png");
+    //if(!textureman.loadFromFile("A/C/C.mtpf"))
+    //    return -1;
+
+	moony::SubTexture subtexture = textureman.findSubTexture("g.png");
 	moony::SubTexture thiswillfail = textureman.findSubTexture("doesnotexist.png");
 
 	moony::RenderManager renderman;
-	moony::Sprite player(subtexture);
-
-	int loop_count = 0;
-	int loop_limit = 30;
-	float frame_total = 0.0f;
-	float frame_time = 0.0f;
-	float logic_time = 0.0f;
-	float delta_time = 0.0f;
-	float frame_limit = 1.0f / 60.0f;
-	sf::Clock frame_clock;
-	sf::Clock timer_clock;
-
-	bool fullscreen = false;
+	moony::Sprite player1(subtexture,2);
+	moony::Sprite player2(textureman.findSubTexture("r.png"));
 
 	std::vector<moony::Sprite> sprites;
 
 	std::vector<std::string> names = textureman.getSubTextureNames();
 
-	for(size_t index = 0; index < 0; index++)
+	for(size_t index = 0; index < 10; index++)
 	{
 		size_t name_index = index % names.size();
 		subtexture = textureman.findSubTexture(names[name_index]);
 
-		sprites.push_back(moony::Sprite(subtexture, std::rand() % 10));
+		sprites.push_back(moony::Sprite(subtexture, random() % 5));
 		sprites.back().setPosition(std::rand() % 800, std::rand() % 600);
 		sprites.back().setOrigin(sprites.back().mTextureRect.width / 2, sprites.back().mTextureRect.height / 2);
 	}
+
+    int loop_count = 0;
+    int loop_limit = 30;
+    float frame_total = 0.0f;
+    float frame_time = 0.0f;
+    float logic_time = 0.0f;
+    float delta_time = 0.0f;
+    float frame_limit = 1.0f / 60.0f;
+    sf::Clock frame_clock;
+    sf::Clock timer_clock;
+
+    bool fullscreen = false;
 
 	while(window.isOpen())
 	{
@@ -88,13 +95,13 @@ int testMoony()
 		{
 			// Test movement
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-				player.move(0, -5);
+				player1.move(0, -5);
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-				player.move(0, 5);
+				player1.move(0, 5);
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-				player.move(-5, 0);
+				player1.move(-5, 0);
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-				player.move(5, 0);
+				player1.move(5, 0);
 			if(sf::Keyboard::isKeyPressed(sf::Keyboard::F11))
 			{
 				window.create(sf::VideoMode(800, 600), "SFML Sprite Batching and Texture Atlases", fullscreen ? sf::Style::Fullscreen : sf::Style::Close);
@@ -116,24 +123,26 @@ int testMoony()
 
 		// Test texture changing
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
-			player.mTextureRect = textureman.findSubTexture("gottagofast.png").mTextureRect;
+			player1.mTextureRect = textureman.findSubTexture("gottagofast.png").mTextureRect;
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::H))
-			player.mTextureRect = textureman.findSubTexture("debug_image10").mTextureRect;
+			player1.mTextureRect = textureman.findSubTexture("debug_image10").mTextureRect;
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::N))
-			player.mTextureRect = textureman.findSubTexture("debug_image15").mTextureRect;
+			player1.mTextureRect = textureman.findSubTexture("debug_image15").mTextureRect;
 
 		logic_time = frame_clock.getElapsedTime().asSeconds();
 		delta_time = frame_total / frame_limit;
 
-		std::cout << "\r" << "render:" << 1.0f / frame_time << " update:" << 1.0f / logic_time << "delta:" << delta_time;
+		std::cout << "\n" << "render:" << 1.0f / frame_time << " update:" << 1.0f / logic_time << "delta:" << delta_time;
 
 		window.clear(sf::Color::Black);
 		renderman.clear();
 
-		/*for(const moony::Sprite& sprite : sprites)
+		for(const moony::Sprite& sprite : sprites)
 			renderman.draw(sprite);
-*/
-		renderman.draw(player);
+
+		renderman.draw(player1);
+        renderman.draw(player2);
+
 		renderman.batch();
 
 		window.draw(renderman);

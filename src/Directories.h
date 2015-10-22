@@ -105,7 +105,7 @@ std::vector<SubImage> getImageList(std::string directory)
 				   check == "hdr" || check == "gif" || check == "psd" || check == "pic")
 				{
 					// Make sure we didn't grab a previously made TextureAtlas
-					if(file_name.substr(0, 2) != "ta")
+					if(file_name.substr(0, 3) != "ta_")
 					{
 						SubImage subimage;
 						subimage.mName = fileData.cFileName;

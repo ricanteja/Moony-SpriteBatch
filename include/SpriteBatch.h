@@ -83,7 +83,7 @@ namespace moony
 					mBatchList[index].mSpriteCount = 0;
 					mBatchList[index].mInactiveFrames = 0;
 				}
-				/*else 
+				else
 				{
 					if(mBatchList[index].mInactiveFrames > 256)
 					{
@@ -93,7 +93,7 @@ namespace moony
 					}
 					else
 						mBatchList[index].mInactiveFrames++;
-				}*/
+				}
 			}
 		}
 
@@ -120,9 +120,12 @@ namespace moony
 			}
 
 			if(batch_ptr == NULL)
+			{
 				mBatchList.push_back(SpriteBatch(sprite));
+				batch_ptr = &mBatchList.back();
+			}
 
-			batch_ptr = &mBatchList.back();
+
 
 			size_t vertex_count = batch_ptr->mSpriteCount * 4;
 

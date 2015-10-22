@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <stack>
+#include <random>
 #include <SFML/Graphics.hpp>
 
 #include "Log.h"
@@ -150,7 +151,7 @@ std::vector<SubImage> generateDebugImages(unsigned int count)
 
 		// "Randomly" generate a color 0 to 255 and a size
 		sf::Color color(std::rand() % 255, std::rand() % 255, std::rand() % 255);
-		sf::Vector2u size(16 + (std::rand() % (MAX_TEXTURE_SIZE / 16)), 16 + (std::rand() % (MAX_TEXTURE_SIZE / 16)));
+		sf::Vector2u size(32 + (std::rand() % (MAX_TEXTURE_SIZE / 16)), 32 + (std::rand() % (MAX_TEXTURE_SIZE / 16)));
 
 		// Create the image, name it and push it to the list
 		subimage.mImage.create(size.x, size.y, color);

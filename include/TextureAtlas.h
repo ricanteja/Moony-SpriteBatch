@@ -101,13 +101,13 @@ namespace moony
 			return true;
 		}
 
-		const SubTexture findSubTexture(const std::string& name)
+		const SubTexture findSubTexture(std::string name)
 		{
 			SubTexture subtexture;
 
 			for(TextureAtlas& atlas : mTextureAtlases)
 			{
-				if(atlas.mSubTextureTable.count(name))
+				if(atlas.mSubTextureTable.count(name) > 0)
 				{
 					subtexture = SubTexture(&atlas.mTexture, atlas.mSubTextureTable[name]);
 					break;
