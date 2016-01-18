@@ -154,7 +154,7 @@ int testMoony(int count)
 
 int main()
 {
-	testMoony(100);
+	testMoony(10000);
 
 	return 0;
 }
