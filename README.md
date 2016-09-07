@@ -1,60 +1,82 @@
-# MoonySpriteBatch
-A collection of C++ code aimed at rendering lots of sprites faster with SFML
+# Moony-SpriteBatch
+Drawing thousands of dynamic z-ordered sprites with SFML
+![alt text](screenshot.png)
+
+## Introduction
+Moony-SpriteBatch allows C++ developers that use SFML to draw many more sprites without worrying about performance limitations. This is significant because applications using SFML begin to slow down when drawing a couple thousand sprites. You can use Moony-SpriteBatch for drawing very large tilemaps, making a bullet hell game or a particle simulator. Moony-SpriteBatch also supports dynamic sprites and z-ordering. This library works directly with Moony-TexturePacker by rendering sprites that use the same texture and can even load .mtpf files produced by the TexturePacker.
+
+## How to build
+The library is header only so there really isn't anything to build if you want to just straight in and use it. You only need to include `Sprite.h`, `SpriteBatch.h` and `Log.h` if you want to use it for logging info. If you are going to be loading zlib compressed texture pack files then define `USE_ZLIB` in your source somewhere and link zlib to your application.
+
+I provided an Example.cpp that showcases what Moony-SpriteBatch can do. To build the example program on Windows with Visual Studio open a `Developer Command Prompt` and enter this:
+
+Change your directory to the source directory
+>cd C:/path/to/source
+
+Compile and link the source code
+>cl /I C:/path/to/SFML/include C:/path/to/SFML/lib/sfml-system.lib C:/path/to/SFML/lib/sfml-window.lib C:/path/to/SFML/lib/sfml-graphics.lib Example.cpp
+
+The code should compile and produce Example.exe.
+
+If you want to build with zlib feature do this:
+>cl /D USE_ZLIB /I C:/path/to/SFML/include /I C:/path/to/zlib/include C:/path/to/SFML/lib/sfml-system.lib C:/path/to/SFML/lib/sfml-window.lib C:/path/to/SFML/lib/sfml-graphics.lib C:/path/to/zlib/lib/zlib.lib Example.cpp
+
+You can also change out the names with debug versions of the libraries if you'd like. Remember that you must put `sfml-system-2.dll`, `sfml-window-2.dll`, `sfml-graphics-2.dll` and `zlib.dll` with the executable in order for it to run. If you want to link statically it's essentially the same thing but using the `/MT` flag, though I haven't tried it..
 
 
-## What Is It?
+If you are using GCC or MinGW open a `Command Prompt` or `Terminal` and enter this:
 
-MoonySpriteBatch is a combination of two projects that I have been working on to optimize drawing lots of 2D quads. Drawing many sprites with just one texture is not too difficult on even older platforms but the challenge arises when you need to incorporate layers and many different textures. By placing all your textures in one file you can overcome this and that is what I've tried to do. This is great for particle effects or bullet hell type games where you need to draw a lot of things at once.
+Change your directory to the source directory
+>cd C:/path/to/source
 
-## How To Build
+Compile and link the source code
+>g++ Example.cpp -I C:/path/to/SFML/include -L C:/path/to/SFML/lib -lsfml-graphics -lsfml-window -lsfml-system -s -O2 -o Example.exe
 
-Both the Texture Packer and the Example depend on SFML and Zlib. Currently I haven't made an appropriate CMake file so if you want to build it on your own setup you have to edit the CmakeLists.txt.. I'll be working on this soon.
+And if you want to build with zlib:
+>g++ Example.cpp -D USE_ZLIB -I C:/path/to/SFML/include -I C:/path/to/zlib/include -L C:/path/to/SFML/lib -lsfml-graphics -lsfml-window -lsfml-system -L C:/path/to/zlib/lib -lzlib -s -O2 -o Example.exe
 
-## How To Use
+__Note!__ I don't know if this needs saying but use your own directories. C:/path/to/SFML is not a real directory, just an example. Just in case..
 
-The library is made up of just 2 headers (Log.h is a bonus). Those are SpriteBatch.h and TextureAtlas.h. These files know everything about loading texture atlases created by the Texture Packer and how to draw sprites.
-
-## Texture Packer
-
-Once built you can drop the Texture Packer tool in any directory you want but it is most useful when usd from the commandline. When you run it without any args by default it will sniff around it's current directory for any images to pack. Texture pack files are named after the folder they were created in and texture pack images begin with ta_[NUMBER][FOLDER], for instance: ta_0myimages.png.
-
-Here are the options you can pass to the tool:
-
--h : Prints a help message with the list of options
--b : Tells the tool not to produce seperate atlas image files but rather compress the raw color data and pack everything into the .mtpf texture pack file
--f [FOLDER] : Designate a folder you specifically want the tool to work in
--r : Recursivley search through all directories under the starting directory. This can be used together with the -f flag
--d [COUNT]: Produce [COUNT] # of debug textures.
--v : Outputs more messages.
-
-## Example
-
-The moony::TextureManager class is in charge of loading your texture atlases you made with the tool. You should only need one instance of this object since it can load multiple texture atlases. You can search for the exact texture you want to assign to your sprite by searching by it's original name. 
-
-Example:
-moony::TextureManager textureman;
-
-textureman.loadFromFile("pack.mtpf");
-
-moony::Sprite sprite(textureman.findSubTexture("happytree.png"));
-
-
-To draw a sprie you need a moony::RenderManager class. It works fairly similar to SFML's own Drawable class (mostly because it inherits from it). Again you should really only need one instance of this class.
-
-Example:
-moony::RenderManager renderman;
-
+## How to use
+The library is designed to be a drop in solution if you are using SFML. Grab the header files and put them where your project can see them and that's it. Now you have to include `TextureAtlas.h` to load .mtpf files. Loading the files work very similarly to loading resources in other SFML classes.
+```cpp
+moony::TextureAtlas texture_atlas;
 ...
+if(!texture_atlas.loadFromFile("path/to/texture/texture.mtpf");
+```
 
-window.clear(sf::Color::Black);
+Now that the `moony::TextureAtlas` object has deserialized our texture.mtpf file we need to create a `moony::SpriteBatch` object so that we can actually draw our sprites later on.
+```cpp
+...
+moony::SpriteBatch sprite_batch;
+```
 
-renderman.clear();
-renderman.draw(sprite);
-renderman.batch();
+Okay let's make our `moony::Sprite` object and set its texture and layer.
+```cpp
+...
+moony::Sprite player1;
+player1.m_subtexture = texture_atlas.findSubTexture("mario.png");
+player1.m_layer = 1;
+```
 
-window.draw(renderman);
-window.display();
+As you can see getting your textures out of the `moony::TextureAtlas` object is super simple. The `findSubTexture();` function returns a `moony::Texture` object that has a pointer to the underlying `sf::Texture` and the `sf::IntRect` which defines the bounds of the texture we requested. The reason I designed the system like this is so that you can use it with `moony::Sprite` or `sf::Sprite` by using the `setTexture()` and `setTextureRect()` functions.
 
-#Notice
+Now on to the drawing. To draw your `moony::Sprite` objects you just need to pass it to `moony::SpriteBatch` in your render loop.
+```cpp
+window.clear();
 
-The work on this is by no means final. Feel free to take ideas and inspiration or let me know where things can be improved (which I'm sure there are many). In the future there may be changes that break the previous version API and I make no commitment to supporting any versions other than the latest.
+sprite_batch.clear();
+sprite_batch.draw(player1);
+...
+sprite_batch.order();
+
+window.draw(sprite_batch);
+```
+
+The `moony::SpriteBatch` works very similarly to SFML's own `sf::RenderTarget` class. The sprite batch holds all the vertices of every sprite you have drawn and needs to be cleared or you will push extra vertices onto it's list. I do plan on coding a fool-proof way of doing this so you can't memory leak even if you tried but if you just remember to call `moony::SpriteBatch::clear()` before drawing your sprites you should be fine. The order function just arranges the sprites in order according to layer and texture. Finally, the sprite batch object is itself a `sf::Drawable` and can be drawn just like a `sf::Sprite`.
+
+##FAQ
+__Can `moony::SpriteBatch` draw `sf::Sprite` objects?__ No.
+
+##To do
+Create a switch so that after every call to order() you are required to call clear() so that you don't overdraw and cause the internal array to grow without bounds.
