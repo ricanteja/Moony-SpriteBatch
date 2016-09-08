@@ -9,7 +9,11 @@
 #include <unordered_map>
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include <zlib.h>
+
+#ifdef USE_ZLIB
+	#include <zlib.h>
+#endif
+
 
 #include "Log.h"
 #include "Texture.h"
