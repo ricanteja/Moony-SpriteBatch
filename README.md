@@ -75,8 +75,8 @@ window.draw(sprite_batch);
 
 The `moony::SpriteBatch` has an API very similar to SFML's own `sf::RenderTarget` class. The sprite batch holds all the vertices of every sprite you have drawn and needs to be cleared or you will push extra vertices onto it's list. I do plan on coding a fool-proof way of doing this so you can't memory leak even if you tried but if you just remember to call `moony::SpriteBatch::clear()` before drawing your sprites you should be fine. The order function just arranges the sprites in order according to layer and texture. Finally, the sprite batch object is itself a `sf::Drawable` and can be drawn just like a `sf::Sprite`.
 
-##FAQ
+## FAQ
 __Can `moony::SpriteBatch` draw `sf::Sprite` objects?__ No.
 
-##To do
+## To do
 Create a switch so that after every call to order() you are required to call clear() so that you don't overdraw and cause the internal array to grow without bounds.
