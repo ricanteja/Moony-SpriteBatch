@@ -138,9 +138,9 @@ namespace moony
 		std::sort(m_batches.begin(), m_batches.end(), [&](const Batch* a_batch, const Batch* b_batch)
 		{
 			if(a_batch->m_layer == b_batch->m_layer)
-				return a_batch->m_texture < a_batch->m_texture;
+				return a_batch->m_texture < b_batch->m_texture;
 
-			return a_batch->m_layer < a_batch->m_layer;
+			return a_batch->m_layer < b_batch->m_layer;
 		});
 	}
 
